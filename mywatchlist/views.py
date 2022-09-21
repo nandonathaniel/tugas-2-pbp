@@ -6,10 +6,17 @@ from django.core import serializers
 
 def show_html(request):
     data_watchlist = MyWatchList.objects.all()
+    deltaWatched = 0
+    for movie in data_watchlist:
+        if movie.watched == True:
+            deltaWatched += 1
+        else:
+            deltaWatched -= 1
     context = {
         'list_watchlist': data_watchlist,
         'nama': 'Fernando Nathaniel Sutanto',
         'npm': '2106629995',
+        'watch_many': (deltaWatched >= 0),
     }
     return render(request, "mywatchlist.html", context)
 

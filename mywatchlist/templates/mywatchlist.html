@@ -32,4 +32,10 @@
     {% endfor %}
   </table>
 
- {% endblock content %}
+{% if watch_many %}
+  <p>Selamat, kamu sudah banyak menonton!</p>
+{% else %}
+  <p>Wah, kamu masih sedikit menonton!</p>
+{% endif %}
+
+{% endblock content %}
