@@ -1,0 +1,112 @@
+[
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 1,
+        "fields": {
+            "watched": true,
+            "title": "Avengers: Infinity War",
+            "rating": 5,
+            "release_date": "2018-04-25",
+            "review": "Love this! Never get bored of this movie"
+        }
+    },
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 2,
+        "fields": {
+            "watched": true,
+            "title": "Top Gun: Maverick",
+            "rating": 4,
+            "release_date": "2022-05-27",
+            "review": "Tom Cruise is amazing!"
+        }
+    },
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 3,
+        "fields": {
+            "watched": true,
+            "title": "Crazy Rich Asian",
+            "rating": 4,
+            "release_date": "2018-08-07",
+            "review": "All Asian people in one frame of big Hollywood movie!"
+        }
+    },
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 4,
+        "fields": {
+            "watched": true,
+            "title": "Venom",
+            "rating": 4,
+            "release_date": "2018-10-03",
+            "review": "I like this one!"
+        }
+    },
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 5,
+        "fields": {
+            "watched": true,
+            "title": "Always Be My Maybe",
+            "rating": 4,
+            "release_date": "2019-05-29",
+            "review": "I love the soundtrack!"
+        }
+    },
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 6,
+        "fields": {
+            "watched": true,
+            "title": "Avengers: Endgame",
+            "rating": 5,
+            "release_date": "2019-04-24",
+            "review": "Must watch this!"
+        }
+    },
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 7,
+        "fields": {
+            "watched": true,
+            "title": "Iron Man",
+            "rating": 5,
+            "release_date": "2008-04-30",
+            "review": "The best among the other Iron Man solo movies!"
+        }
+    },
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 8,
+        "fields": {
+            "watched": true,
+            "title": "Begin Again",
+            "rating": 4,
+            "release_date": "2014-06-27",
+            "review": "Enjoy this film!"
+        }
+    },
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 9,
+        "fields": {
+            "watched": true,
+            "title": "Last Christmas",
+            "rating": 4,
+            "release_date": "2019-11-30",
+            "review": "Christmas in London <3"
+        }
+    },
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 10,
+        "fields": {
+            "watched": true,
+            "title": "Home Alone",
+            "rating": 5,
+            "release_date": "1990-11-10",
+            "review": "The best Christmas film!"
+        }
+    }
+]
