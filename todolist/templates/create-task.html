@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block meta %}
+<title>Tambah Task</title>
+{% endblock meta %}
+
+{% block content %}  
+
+<div class = "tambah-task">
+    
+    <h1>Tambah task</h1>  
+
+        <form method="POST" >  
+            {% csrf_token %}  
+            <table>  
+                <tr>
+                    <td>Judul: </td>
+                    <td><input type="text" name="title" placeholder="Title"></td>
+                </tr>
+                        
+                <tr>
+                    <td>Deskripsi: </td>
+                    <td><input type="text" name="description" placeholder="Description"></td>
+                </tr>
+    
+                <tr>
+                    <td></td>
+                    <td><input type="submit" value="Submit"></td>
+                </tr>
+            </table>  
+        </form>
+
+    {% if messages %}  
+        <ul>   
+            {% for message in messages %}  
+                <li>{{ message }}</li>  
+                {% endfor %}  
+        </ul>   
+    {% endif %}
+
+</div>  
+
+{% endblock content %}
