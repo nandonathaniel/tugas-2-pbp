@@ -6,37 +6,37 @@
 
 {% block content %}
 
-<div class = "login">
+<nav class="navbar navbar-expand-lg bg-dark">
+    <div class="container-fluid">
+      <div class="navbar-brand">Todo List</div>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+</nav>
+
+<div class = "login containers-fluid text-center mt-5">
 
     <h1>Login</h1>
 
-    <form method="POST" action="">
+    <form method="POST" action="" class = "form-login">
         {% csrf_token %}
-        <table>
-            <tr>
-                <td>Username: </td>
-                <td><input type="text" name="username" placeholder="Username" class="form-control"></td>
-            </tr>
-                    
-            <tr>
-                <td>Password: </td>
-                <td><input type="password" name="password" placeholder="Password" class="form-control"></td>
-            </tr>
-
-            <tr>
-                <td></td>
-                <td><input class="btn login_btn" type="submit" value="Login"></td>
-            </tr>
-        </table>
+        <input type="text" name="username" placeholder="Username" class="form-control">
+        <br/>
+        <input type="password" name="password" placeholder="Password" class="form-control">
+        <br/>
+        <input class="btn btn-primary btn-lg btn-block" type="submit" value="Login">
+        <div class="messages">
+            {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %} 
+        </div>
     </form>
-
-    {% if messages %}
-        <ul>
-            {% for message in messages %}
-                <li>{{ message }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}     
+    
         
     Belum mempunyai akun? <a href="{% url 'todolist:register' %}">Buat Akun</a>
 

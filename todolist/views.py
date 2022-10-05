@@ -62,8 +62,7 @@ def create_task(request):
         desc = request.POST.get("description")
         Task.objects.create(user = request.user, date = timezone.now(), title = judul, description = desc)
 
-        messages.success(request, 'Task baru telah berhasil ditambah!')
         return redirect('todolist:show_todolist')
 
-    context = {}
+    context = {'pemilik' : request.user}
     return render(request, 'create-task.html', context)
