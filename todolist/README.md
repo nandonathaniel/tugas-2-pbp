@@ -1,100 +1,123 @@
 ## Link Website
 Link bisa diakses di [sini](https://tugas-2-pbp-fernando.herokuapp.com/todolist).
-## `{% csrf_token %}`
+## Inline, Internal, External CSS
 
-Kegunaan `{% csrf_token %}` adalah untuk generate token random yang tidak dapat diketahui siapapun. Jadi jika ada request tanpa CSRF Token yang tepat, maka pasti request tersebut ditolak. 
 
-Terkadang oknum-oknum orang tidak bertanggung jawab menyematkan file berupa link, image dll. yang mana jika dibuka bisa terdapat malicious code. Yang mana membuat kita tidak sadar mengirim request ke website yang sedang digunakan. Di kejadian seperti inilah `{% csrf_token %}` berguna.
+### Inline CSS
+Inline CSS digunakan untuk tag HTML tertentu. Atribut ``<style>`` digunakan kepada tag HTML tertentu. Cara ini kurang disarankan, karena setiap tag HTML kita harus memberi `<style>` masing-masing yang mana akan membuang waktu dan lebih sulit untuk di-*handle*. Sebaliknya jika dilakukan pada moment  tertentu justru inline CSS menjadi berguna. Contohnya, ketika kita hanya ingin memberi CSS pada satu tag dan yang lain tidak ingin diberi CSS. Akibat dari penggunaan Inline CSS juga dia akan mengoverride seluruh CSS yang ada alias dia prioritas pertama.
+Berikut adalah contoh Inline CSS
+`<p style="color:white;">He's Cobham's Finest</p>`
 
-Jika tidak ada {% csrf_token %} maka penyerang/hacker dapat melakukan CSRF terhadap request yang berhubungan dengan form tersebut.
-
-## `<form>` manual
-
-Tentunya bisa membuat `<form>` manual tanpa `{{form.as_table}}`. Kita bisa melakukan sesuka hati kita pada HTML. Untuk membuat sebuah <form>, berarti berisi beberapa <input> yang bertype = "text" (yang menjadi data2 yang ingin disubmit) dan satu <input> yang bertype = submit (yang menjadi tombol untuk disubmit). Contoh kode seperti pada `create-task.html` milik saya sebagai berikut
-```py
-<form method="POST" >  
-            {% csrf_token %}  
-            <table>  
-                <tr>
-                    <td>Judul: </td>
-                    <td><input type="text" name="title" placeholder="Title"></td>
-                </tr>
-                        
-                <tr>
-                    <td>Deskripsi: </td>
-                    <td><input type="text" name="description" placeholder="Description"></td>
-                </tr>
-    
-                <tr>
-                    <td></td>
-                    <td><input type="submit" value="Submit"></td>
-                </tr>
-            </table>  
-        </form>
+### Internal CSS
+Internal CSS diimplementasi pada `head` dalam suatu page HTML, pada tag`<style>`. Jadi semua fitur CSS pada Internal CSS hanya dijalankan pada page tersebut. Jadi berguna untuk ketika ingin mengubah CSS hanya pada satu halaman saja. Namun kelemahannya adalah memperlambat *load website* karena setiap ketika pindah page CSS harus di*load* ulang.
+Berikut adalah contoh Internal CSS.
 ```
-    
-## Alur data
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+    background-color: blue;
+}
+h1 {
+    color: red;
+    padding: 60px;
+} 
+</style>
+</head>
+<body>
+ 
+<h1>He's one of our own</h1>
+<p>There is no doubt</p>
+ 
+</body>
+</html>
+```
 
-User submit data melalui HTML form, data tersebut akan dilihat dalam variabel `request.POST`, lalu akan diambil `views.py` dan dilakukan `save()` atau `create()` lalu data tersebut tersimpan di db.sqlite3.
+### External CSS
+External CSS diimplementasi pada file terpisah dengan page HTML. Jadi pada `body` HTML harus mengexport CSS. Keuntungannya ukuran file HTML jadi jauh lebih kecil dan kita tidak harus mengimplementasikan CSS berulang kali. Ini juga biasanya dilakukan jika ingin membuat website yang setiap pagenya CSSnya mirip-mirip. Jika ingin ada beda bisa menggunakan Inline CSS.
+Berikut adalah contoh penggunaaan External CSS
+```
+<head>
+  <link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+```
 
-Jika ingin ditampilkan dalam HTML, ambilah dari database melalui `views.py` lalu barulah beri ke HTML yang diinginkan untuk ditampilkan
+## Tag HTML5
+
+`<a>` tag element untuk hyperlink.
+`<p>` tag element untuk paragraf/text
+`<div>` tag element untuk mendefinisikan suatu division.
+`<h1> <h2> <h3> <h4> <h5> <h6>` tag element untuk header yang ada bermacam ukuran
+`<form>` tag element untuk form. Form akan berisi beberapa tag `<input>` untuk menyimpan data input dari user.
+`<input>` tag element agar user dapat memberikan input.
+`<style>` tag element untuk mendefinisikan internal CSS dalam suatu halaman HTML
+`<head>` tag element untuk  metadata html.
+`<body>` tag element untuk data html.
+`<div>` tag element untuk unordered list
+`<ol>` tag element untuk ordered list
+`<li>` tag element untuk isi2 dari dari list `<ul>` atau `<ol>`.
+`<img>` tag element untuk gambar.
+`<button>` tag element untuk menekan tombol
+`<table>` tag element untuk mendefinisikan tabel
+dan masih banyak lagi.
+
+## CSS Selector
+
+- Element Selector
+Selector yang langsung memanfaatkan tag HTML sebagai selector-nya. Untuk implementasinya, langsung memakai nama tag tersebut, seperti
+```
+h1 {
+    color: blue;
+}
+```
+
+- Class Selector
+Selector yang langsung menggunakan class yang sudah didefinisikan pada tag sebagai selector-nya. Untuk implementasinya, memakai nama class pada tag tersebut, dan diberi `.` di depan
+Berikut contohnya jika *class* nya bernama `student`
+```
+.student {
+    color: blue;
+}
+```
+
+- ID Selector
+Selector yang langsung menggunakan ID yang sudah didefinisikan pada tag sebagai selector-nya. Untuk implementasinya, memakai nama id pada tag tersebut, dan diberi `#` di depan.
+Berikut contohnya jika id nya bernama `thisimg`
+```
+#thisimg {
+    color: blue;
+}
+```
 
 ## Penjelasan Implementasi
 
 ### Step 1
-Karena memakai proyek dari tugas 3, maka pertama kali yang kita lakukan adalah membuat app baru dengan cara ini `python manage.py startapp todolist`, jangan lupa tambahkan `todolist` pada `settings.py`.
+Memasukkan *Bootstrap* pada semua html dengan cara memasukkan link `<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">` pada `base.html`. Karena semua page adalah `base.html` yang diextend.
 
 ### Step 2
-Membuat models baru dengan nama "Task" di `todolist/models.py` sesuai dengan attribute-attribute yang disebutkan pada deskripsi tugas
+Memodifikasi `login.html` mengganti nama *class* menjadi `login containers-fluid text-center mt-5` yang berarti ingin ditengah dan ada margin atas. Lalu button pada `login.html` lakukan mengganti nama *class* menjadi `btn btn-primary btn-lg btn-block`. Ini adalah kegunaan bootstrap. Lalu saya juga ada buat External CSS dengan melakukan Class Selector dll.
 
 ### Step 3
-Untuk `login` dan `register` ikuti seperti Tutorial 3 (tambahkan di pathnya dan bikin fungsi di     `views`, bikin html juga). Khususnya untuk `register`, menggunakan `UserCreationForm` dan pada htmlnya menggunakan {{ form.as_table }}.
+Memodifikasi `register.html` dengan tidak mengikut sertakan `form.as_table` agar lebih bisa diotak-atik. Jadi inspect HTML dari yang sebelumnya (yang memakai `form.as_table`). Lalu saya banyak menambahkan ID Selector untuk page ini.
 
 ### Step 4
-Menyiapkan 2 html file pada `templates` yaitu `create-task.html` dan `todolist.html`, lalu siapkan kerangkanya. Terutama untuk `todolist.html`, siapkan tempat untuk memberitahu pemilik akun sekarang dan 2 tombol yaitu tombol logout dan tombol `Bikin task baru`.
+Memodifikasi `todolist.html` dengan memakai `card` nya Bootstrap bisa memilih banyak pilihan pada link [berikut](https://getbootstrap.com/docs/4.0/components/card/). Lalu saya memberikan CSS class selector untuk mengatur margin dari card.
 
 ### Step 5
-Menambahkan `show_todolist` pada `views.py`.
-```python
-@login_required(login_url='/todolist/login/')
-def show_todolist(request):
-    all_tasks = Task.objects.filter(user = request.user)
-    context = {
-        'list_tasks': all_tasks,
-        'pemilik': request.user,
-    }
-    return render(request, "todolist.html", context)
-```
-Perhatikan bahwa kita harus login terlebih dahulu, dan membawa `request.user` dan `all_tasks` yaitu tasks yang pernah dibuat user tersebut, yang akan dikirim ke `todolist.html`.
+Memodifikasi `create-task.html` dengan memakai metode yang sama dengan `register.html`.
 
 ### Step 6
-Menambahkan `create_task` pada `views.py`.
-```python
-def create_task(request):
-    if request.method == 'POST':
-        judul = request.POST.get("title")
-        desc = request.POST.get("description")
-        Task.objects.create(user = request.user, date = timezone.now(), title = judul, description = desc)
-
-        messages.success(request, 'Task baru telah berhasil ditambah!')
-        return redirect('todolist:show_todolist')
-
-    context = {}
-    return render(request, 'create-task.html', context)
-```
-Perhatikan bahwa `request.method` harus `POST`, yang berarti memang sudah terbuat task baru, lalu kita dapatkan `title` dan `description` yang diinput dan masukkan waktu sekarang dan usernya, lalu langsung direct ke `show_todolist`. Perhatikan untuk ke `create-task.html` kita ga perlu bawa data apa-apa.
+Menambah navbar untuk mempercantik pada semua page yang bisa dipilih pada link [berikut](https://getbootstrap.com/docs/4.0/components/navbar/).
 
 ### Step 7
-Pada `todolist/urls.py` daftarkan fungsi `login`, `logout`, `register`, `create_task`, `show_todolist` yang sudah dibuat sebelumnya.
-
-Agar hal diatas dapat terlaksanakan dengan sempurna, perlu dibuat path juga pada `project_django/urls.py` sebagai berikut.
-Membuat route baru yang bernama `todolist/` dengan implementasi `path('todolist/', include('todolist.urls'))` agar semua path pada `todolist.urls` bisa dilaksanakkan.
-
-### Step 7
-Melakukan `makemigrations`, `migrate`, `runserver`.
+Mengecek *responsive* sejauh yang saya lihat ketika memperbesar dan memperkecil ukuran dan membuka pada HP sudah cukup baik
 
 ### Step 8
-Push ke Github, dan deployment pada herokuapp akan berjalan secara otomatis.
+Untuk hover card, menggunakan `.card:hover` pada `style.css`. Animasi yang dilakukan adalah memperbesar ukuran card sebesar 5%.
+
+### Step 9
+`add`, `commit`, `push` ke GitHub dan selesai.
 
 ## Akun
 
